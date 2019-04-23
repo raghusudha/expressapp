@@ -25,12 +25,20 @@ router.delete('/:id', function(req, res, next) {
   dbService.deleteCustomer(customerId,callback);
 });
 
-router.get('/:id', function(req, res, next) {
-  var callback = function(customer){
-    res.send(customer);
+// router.get('/:id', function(req, res, next) {
+//   var callback = function(customer){
+//     res.send(customer);
+//   }
+//   var customerId = req.params.id;
+//   var customer = dbService.getCustomerById(customerId,callback);
+// });
+
+router.get('/:phone', function(req, res, next) {
+  var callback = function(result){
+    res.send(result);
   }
-  var customerId = req.params.id;
-  var customer = dbService.getCustomerById(customerId,callback);
+  var customerPhone = req.params.phone;
+ dbService.getCustomerByPhone(customerPhone,callback);
 });
 
 router.put('/:id', function(req, res, next) {

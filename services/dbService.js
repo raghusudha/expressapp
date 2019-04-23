@@ -85,4 +85,22 @@ service.updateCustomer = function(customer,callback){
     });
 };
 
+
+service.getCustomerByPhone= function(phone,callback){
+  var record = {};
+  var sql = "SELECT * FROM customer where phone='"+phone+"'";
+  console.log("sql:"+sql);
+  pool.getConnection(function(err, connection) {
+    if(err) { console.log(err); callback({}); return; }
+    // make the query
+    connection.query(sql, function(err, results) {
+      connection.release();
+      if(err) { console.log(err); callback({}); return; }
+      if(results.length != 0){
+        callback(results);
+      }
+    });
+  });
+
+};
 module.exports = service;
